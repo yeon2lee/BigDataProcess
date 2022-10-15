@@ -43,11 +43,11 @@ while (1):
 	same -= 1
 
 n = len(data)
-A_plus = math.floor(n * 0.3 * 0.5)
 A_zero = math.floor(n * 0.3)
-B_plus = math.floor(n * 0.7 * 0.5)
+A_plus = A_zero * 0.5
 B_zero = math.floor(n * 0.7)
-C_plus = B_zero + math.floor((n - B_zero) * 0.5)
+B_plus = B_zero * 0.5
+C_plus = B_zero + (n - B_zero) * 0.5
 
 row_id = 0
 for row in ws:
