@@ -17,5 +17,5 @@ with open(inputfile, "rt") as fp:
 	
 with open(outputfile, "wt") as fp:
 	for uber in uber_list:
-		fp.write("{},{} {},{}\n".format(uber[0], uber[1], uber[2], uber[3]))
+		fp.write("{},{}\t{},{}\n".format(uber[0], uber[1], uber[2], uber[3]))
 		
