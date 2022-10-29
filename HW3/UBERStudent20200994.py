@@ -25,5 +25,5 @@ with open(inputfile, "rt") as fp:
 with open(outputfile, "wt") as fp:
 	for uber in uber_list:
 		for day in uber_list[uber]:
-			fp.write("{},{}\t{},{}\n".format(uber, day, uber_list[uber][day][0], uber_list[uber][day][1]))
+			fp.write("{},{} {},{}\n".format(uber, day, uber_list[uber][day][0], uber_list[uber][day][1]))
 		
