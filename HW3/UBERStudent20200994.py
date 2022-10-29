@@ -13,17 +13,13 @@ with open(inputfile, "rt") as fp:
 		uber = line.strip().split(",")
 		day = uber[1].split("/")
 		day = days[datetime.date(int(day[2]), int(day[0]), int(day[1])).weekday()]
-		if uber[0] not in uber_list:
-			uber_list[uber[0]] = {}
+		info = (uber[0], day)
+		if info not in uber_list:
+			uber_list[info] = [int(uber[2]), int(uber[3])]
+		else:
+			uber_list[info][0] += int(uber[2])
+			uber_list[info][1] += int(uber[3])
 
-		if day not in uber[0]:
-			uber_list[uber[0]][day] = [uber[2], uber[3]]
-		else:		
-			uber_list[uber[0]][day][0] += uber[2]
-			uber_list[uber[0]][dat][1] += uber[3] 
-	
 with open(outputfile, "wt") as fp:
 	for uber in uber_list:
-		for day in uber_list[uber]:
-			fp.write("{},{} {},{}\n".format(uber, day, uber_list[uber][day][0], uber_list[uber][day][1]))
-		
+		fp.write("{},{} {},{}\n".format(uber[0], uber[1], uber_list[uber][0], uber_list[uber][1]))		
