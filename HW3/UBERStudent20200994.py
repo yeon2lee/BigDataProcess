@@ -12,7 +12,7 @@ with open(inputfile, "rt") as fp:
 	for line in fp:
 		uber = line.strip().split(",")
 		day = uber[1].split("/")
-		day = days[calendar.weekday(int(day[2]), int(day[0]), int(day[1]))
+		day = days[calendar.weekday(int(day[2]), int(day[0]), int(day[1]))]
 
 		info = (uber[0], day)
 		if info not in uber_dict:
