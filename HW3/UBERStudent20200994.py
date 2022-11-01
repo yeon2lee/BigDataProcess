@@ -1,32 +1,36 @@
 #!/usr/bin/python3
-
 import sys
 import calendar
 
-inputfile = sys.argv[1]
-outputfile = sys.argv[2]
+class Quantity:
+	def __init__(self, vehicles, trips):
+		self.vehicles = vehicles
+		self.trips = trips
 
-uber_dict = dict()
-days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-with open(inputfile, "rt") as fp:
+dayofweek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+input = sys.argv[1]
+output = sys.argv[2]
+
+dic = dict()
+with open(input, "rt") as fp:
 	for line in fp:
-		uber = line.split(",")
-		day_list = uber[1].split("/")
-		tmp = calendar.weekday(int(day_list[2]), int(day_list[0]), int(day_list[1]))
-		day = days[tmp]
-		
-		key = (uber[0], day)
-		if key not in uber_dict:
-			uber_dict[key] = [int(uber[2]), int(uber[3])]
+		data = line.split(",")
+		temp = data[1].split("/")
+		day = calendar.weekday(int(temp[2]), int(temp[0]), int(temp[1]))
+		dow = dayofweek[day]
+		info = (data[0], dow)
+		if info not in dic:
+			dic[info] = Quantity(int(data[2]), int(data[3]))
 		else:
-			uber_dict[key][0] += int(uber[2])
-			uber_dict[key][1] += int(uber[3])
+			dic[info].vehicles += int(data[2])
+			dic[info].trips += int(data[3])
 
-keys = uber_dict.keys()
+keys = dic.keys()
 result = ""
 for key in keys:
-	value = uber_dict[key]
-	result += key[0] + "," + key[1] + " " + str(value[0]) + "," + str(value[1]) + "\n"
+	value = dic[key]
+	result += key[0] + "," + key[1] + " " + str(value.vehicles) + "," + str(value.trips) + "\n"
 
-with open(outputfile, "wt") as fp:
+with open(output, "wt") as fp:
 	fp.write(result)
+	
