@@ -4,10 +4,9 @@ import numpy as np
 import operator 
 
 def create_data_set(training_dir):
-	labels = []
 	file_list = os.listdir(training_dir)
 	data = []
-	index = 0
+	labels = []
 	for file_name in file_list:
 		file = training_dir + "/" + file_name 
 		data_label_id = file_name.split('_')
@@ -48,10 +47,10 @@ if __name__ == "__main__":
 	dataSet, labels = create_data_set(training_dir)
 
 	file_list = os.listdir(test_dir)
-	total_count = len(file_list)
+	total_file_count = len(file_list)
 
 	for i in range(1, 21):
-		count = 0
+		fail_count = 0
 
 		for file_name in file_list:
 			file = test_dir + "/" + file_name
@@ -68,8 +67,8 @@ if __name__ == "__main__":
 				inX = np.array(tmp_data)
 				answer = classify0(inX, dataSet, labels, i)
 				if answer != correct:
-					count += 1
+					fail_count += 1
 
-		error = round(count / total_count * 100)
+		error = round(fail_count / total_file_count * 100)
 		print(error)
 
